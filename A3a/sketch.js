@@ -2,52 +2,49 @@ var headlines = [];
 
 function preload() {
 
-  // Assemble url for API call
   var url = "https://api.nytimes.com/svc/topstories/v2/home.json";
-  var apikey = "121e8c0f4c594ca5a9ed77657b0dfbe0"; // see: https://developer.nytimes.com
+  var apikey = "121e8c0f4c594ca5a9ed77657b0dfbe0"; 
   url += "?api-key=" + apikey;
 
   nytResponse = loadJSON(url);
-  // loadJSON() is asynchronous, but calling it inside preload() guarantees
-  // we'll have a response before setup() and draw() is run.
 }
+
 
 function setup() {
-  createCanvas(800, 1000);
+  
+  createCanvas(800,1000);
   background(81,103,112);
-
-  textSize(18);
   textAlign(LEFT);
-
-  noLoop(); // since we're not animating, one frame is sufficient: run draw() just once
-
-  extractHeadlines();
 }
 
-function draw() {
-  background(81,103,112);
 
-  var lineheight = 24;
+function draw() {
+ 
+  background(81,103,112);
+  textSize(18);
+ var lineheight = 24;
   var margin = 40;
   translate(margin, margin);
 
-  for (var i = 0; i < headlines.length; i++) {
-    // draw headline
-    fill(255);
-    text(headlines[i], 0, i*lineheight);
-  }
-}
-
-function extractHeadlines() {
-
-  // console.log(nytResponse); // take a look at the full API response structure
-
-  for (var i = 0; i < nytResponse.results.length; i++) {
+  for (var i = 0; i < nytResponse.results.length; i++){
     var h = nytResponse.results[i].title;
-    // besides .title, other text data available to you include:
-    // .abstract, .byline, .section, etc. etc.
-    append(headlines, h);
+    headlines=append(headlines,h);
   }
 
-  // console.log(headlines); // make sure counted data looks as expected
+  for (var i = 0; i < nytResponse.results.length; i++){
+    var words = split(headlines[i], ' ');
+    var X = 0
+
+    for(var k = 0; k < words.length; k++) {
+      if (words[k].toLowerCase().indexOf('and') !== -1 ||
+        words[k].toLowerCase().indexOf('of') !== -1) {
+          fill(255,255,0);
+      } else{
+        fill(255);
+      }
+      text(words[k] + ' ', X+20, (i + 5)*20);
+      X += textWidth(words[k]+' ');
+    } 
+  } 
+
 }
