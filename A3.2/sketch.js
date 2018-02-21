@@ -29,15 +29,14 @@ function setup() {
   textSize(20);
   textAlign(LEFT);
 
-  noLoop(); 
   extractHeadlines();
 }
 
 function draw() {
-  background(40,77,179);
+  background(150);
 
-  var lineheight = 25;
-  var margin = 45;
+  var lineheight = 24;
+  var margin = 40;
   translate(margin, margin);
 
   for (var i = 0; i < headlines.length; i++) {
@@ -46,19 +45,29 @@ function draw() {
     var nextX = 0;
 
     for (var j = 0; j < words.length; j++) {
-      if (hitwords.includes(words[j].toLowerCase())) {
-        fill(100+(i*10));
+      if (!hitwords.includes(words[j].toLowerCase())) {
+        fill((1-mouseX/width)*255);
+        text(words[j]+' ', nextX, i*lineheight);
+
       } else {
-        fill(255-(i*10));
+
+        fill("skyblue");
+        push()
+        textSize(12 +(mouseX/width)*20);
+        text(words[j]+' ',nextX, i*lineheight);
+        stroke(200);
+        line(nextX,i*lineheight,textWidth(words[j])-150,lineheight)
+        pop()
       }
 
-      text(words[j]+' ', nextX, i*lineheight);
+      
       nextX += textWidth(words[j]+' ');
     }
   }
 }
 
 function extractHeadlines() {
+
 
   for (var i = 0; i < nytResponse.results.length; i++) {
     var h = nytResponse.results[i].title;
