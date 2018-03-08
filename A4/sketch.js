@@ -1,24 +1,16 @@
 var table;
 var crimetype;
-
-function preload(){
-  table = loadTable('data.csv', 'csv', 'header');
-
-}
+var data = [200,200,400,150,330,420,580,690,170,310,220];
+var x=mouseX;
+var y=mouseY;
 
 function setup() {
   createCanvas(1000, 1000);
-  loadData();
-  noLoop();
 }
 
-function loadData() {
-  crimetype = table.getColumn("LAW_CAT_CD");
-  console.log(crimetype);
-}
 
 function draw(){
-  background(150, 150, 100, 200);
+  background(180, 150, 100, 200);
   fill(255);
   textSize(25);
   text("Crime Happened in Manhattan in June 1st 2017", 30,30);
@@ -26,25 +18,13 @@ function draw(){
   var rectheight = 15;
   textSize(12);
 
-  if (crimetype == 'FELONY'){
-    for (var i = 0; i<355; i++){
-    fill(190, 30, 70);
-    rect(0, (i+2)*lineheight, width*i, rectheight/2);
-  }
-}
-  else if (crimetype == 'MISDEMEANOR'){
-    for (var j = 0; j++){
-    fill(190, 20, 70);
-    rect(0, (j+2)*lineheight, width*j, rectheight/2);
-  }
-}
-  else if(crimetype == 'VIOLATION'){
-    for (var k = 0; k++){
-      fill(190,20,70);
-      rect(0, (k+2)*lineheight, width*k, rectheight/2)
+  for (var i = 0; i < 11; i++){
+    fill(100,174,247);
+    rotate(25);
+    rect(0, (i+20)*lineheight, data[i], rectheight);
+    if (mouseIsPressed){
+      fill(255);
+      text("Crime Type",x,y);
     }
-  }
-  else{
-    fill(0)
   }
 }
