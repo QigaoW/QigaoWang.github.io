@@ -3,6 +3,7 @@ var crimetype;
 
 function preload(){
   table = loadTable('data.csv', 'csv', 'header');
+
 }
 
 function setup() {
@@ -26,21 +27,21 @@ function draw(){
   textSize(12);
 
   if (crimetype == 'FELONY'){
-    for (var i = 0; i++) {
+    for (var i = 0; i<355; i++){
     fill(190, 30, 70);
-    rect(0, (i+2)*lineheight, width*i, -1*rectheight);
+    rect(0, (i+2)*lineheight, width*i, rectheight/2);
   }
 }
-else if (crimetype == 'MISDEMEANOR'){
-  for (var j = 0; j++) {
+  else if (crimetype == 'MISDEMEANOR'){
+    for (var j = 0; j++){
     fill(190, 20, 70);
-    rect(0, (j+2)*lineheight, width*j, -1*rectheight);
+    rect(0, (j+2)*lineheight, width*j, rectheight/2);
   }
 }
   else if(crimetype == 'VIOLATION'){
     for (var k = 0; k++){
       fill(190,20,70);
-      rect(0, (k+2)*lineheight, width*k, -1*rectheight)
+      rect(0, (k+2)*lineheight, width*k, rectheight/2)
     }
   }
   else{
