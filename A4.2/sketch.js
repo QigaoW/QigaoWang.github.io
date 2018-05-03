@@ -43,6 +43,23 @@
       //draw the piechart
       
       arc(320 + dx, 200 + dy, 300, 300, piedata[i][0], piedata[i][1], PIE);
+      textSize(20);
+      fill(200,130,70);
+      text("37%", 234, 280);
+      text("40 yr", 230, 255);
+      text("26%", 262, 140);
+      text("50 yr", 260, 115);
+      text("22.5%", 376,282);
+      text("30 yr", 376,257);
+      textSize(14);
+      text("10%", 390,145);
+      text("20 yr", 390,130);
+      text("3%", 418,191);
+      text("other", 415,178);
+      text("1.5%", 378,45);
+      text("60 yr", 380,30);
+      line(388,48,382,60);
+      text("1.5%", 378,45);
     }
   }
 
@@ -51,10 +68,3 @@
     if(mouseY < 200) mouseAngle = mouseAngle + Math.PI;
   }
 
-  function draw2(){
-    textSize(28);
-    fill(200,130,70);
-    text("one small step for man...", 25, 60);
-    textSize(16);
-    text("one small step for man...", 27, 90);
-  }
